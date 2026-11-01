@@ -482,6 +482,39 @@ html[data-theme="dark"] .lc-st,html[data-theme="dark"] .lc-vn{stroke:var(--olive
 html[data-theme="dark"] .lc-lf path:first-child{stroke:var(--olive-lt)}
 html[data-theme="dark"] a:focus-visible,html[data-theme="dark"] button:focus-visible{outline-color:var(--rose)}
 html[data-theme="dark"] img{filter:brightness(.92)}
+
+/* ===== body text: 14px, softer colour ===== */
+body{font-size:14px}
+.hero-copy p,.svc p,.item p,.steps p,.who-grid p,.head p,.about .bio p,.inv-copy p.muted,.contact .lede,.details li,form .small,.shop .note p,.cols div,.field input,.field textarea{font-size:14px!important;line-height:1.75}
+.hero-copy p,.about .bio p{color:#3A3A3A}
+html[data-theme="dark"] .hero-copy p,html[data-theme="dark"] .about .bio p{color:#D6D0CD}
+.hero-copy p{max-width:48ch}
+@media (max-width:420px){.hero .label{font-size:10.5px;letter-spacing:.11em}}
+
+/* ===== nav + theme switch, calmer ===== */
+.nav-theme{display:flex;align-items:center}
+.nav ul .theme-btn{width:auto;height:auto;border:0;border-radius:0;background:none;padding:2px;opacity:.7;margin-left:-6px}
+.nav ul .theme-btn:hover{opacity:1;background:none}
+.nav ul .theme-btn svg{width:17px;height:17px;stroke-width:1.5}
+.theme-pill{display:inline-flex;align-items:center;gap:2px;padding:3px;border-radius:99px;border:1px solid #333;background:transparent;color:#9A9A9A;cursor:pointer;font:inherit}
+.tp-opt{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;font-size:12px;letter-spacing:.06em;transition:background .25s,color .25s}
+.tp-opt svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html:not([data-theme="dark"]) .tp-light,html[data-theme="dark"] .tp-dark{background:#EDE8E6;color:#111}
+.copy{align-items:center}
+/* dark mode: neutral pills in the invest section */
+html[data-theme="dark"] .inv-copy .chips span{border-color:rgba(255,255,255,.22);color:#D6D0CD}
+/* shorter text blocks */
+.hero-copy p,.svc p,.item p,.steps p,.who-grid p,.head p,.about .bio p,.inv-copy p.muted,.contact .lede,form .small{line-height:1.55!important}
+.about .bio{gap:10px}
+
+/* floating light/dark switch, bottom right */
+.theme-float{position:fixed;z-index:45;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));border-color:rgba(17,17,17,.12);background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#5F5F5F;box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.theme-float .tp-opt{padding:7px 11px}
+.theme-float em{font-style:normal}
+html:not([data-theme="dark"]) .theme-float .tp-light{background:var(--ink);color:#fff}
+html[data-theme="dark"] .theme-float{background:rgba(24,24,24,.85);border-color:rgba(255,255,255,.14);color:#A8A29F;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+html[data-theme="dark"] .theme-float .tp-dark{background:#EDE8E6;color:#111}
+@media (max-width:600px){.theme-float em{display:none}.theme-float .tp-opt{padding:8px 10px}.theme-float .tp-opt svg{width:15px;height:15px}}
 /* irrigation carousel */
 .carousel{position:relative;aspect-ratio:1;max-width:100%;overflow:hidden;border-radius:4px;background:var(--paper);touch-action:pan-y}
 .carousel .ctrack{display:flex;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1)}
@@ -525,10 +558,6 @@ html.js .chip[data-reveal],html.js .avatar[data-reveal]{transform:scale(.92);tra
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-end">
-      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark mode">
-        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg>
-        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.7 4.7l1.6 1.6M17.7 17.7l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.7 19.3l1.6-1.6M17.7 6.3l1.6-1.6"/></svg>
-      </button>
       <a class="btn btn-pink" href="#contact">Book a consult</a>
     </div>
   </div>
@@ -541,7 +570,7 @@ html.js .chip[data-reveal],html.js .avatar[data-reveal]{transform:scale(.92);tra
       <div class="hero-copy">
         <span class="label">Agribusiness · Serving all of Nigeria &amp; beyond</span>
         <h1><span class="thin">We plan, build &amp; manage</span>farms that thrive.</h1>
-        <p>Farm consultation, farm setup and management, greenhouse setup and farm investment for new growers, busy professionals and investors. Plus the seeds, agrochemicals and irrigation materials to keep every season growing. We travel to your site, anywhere in Nigeria.</p>
+        <p>Farm consultation, setup and management, greenhouses and farm investment for new growers, busy professionals and investors. We travel to your site, anywhere in Nigeria.</p>
         <div class="ctas">
           <a class="btn btn-pink" href="#contact">Book a consultation</a>
           <a class="btn btn-line" href="#services">Our services</a>
@@ -795,6 +824,8 @@ html.js .chip[data-reveal],html.js .avatar[data-reveal]{transform:scale(.92);tra
   </div>
   <svg class="vine" viewBox="0 0 360 626" aria-hidden="true"><use href="#ff-mark"/></svg>
 </footer>
+<button class="theme-pill theme-float" type="button" data-theme-toggle aria-label="Switch to dark mode"><span class="tp-opt tp-light"><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.7 4.7l1.6 1.6M17.7 17.7l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.7 19.3l1.6-1.6M17.7 6.3l1.6-1.6"/></svg><em>Light</em></span><span class="tp-opt tp-dark"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg><em>Dark</em></span></button>
+
 
 
 
@@ -803,10 +834,10 @@ html.js .chip[data-reveal],html.js .avatar[data-reveal]{transform:scale(.92);tra
 
 /* Theme: follows the device, toggle remembers the visitor's choice */
 (function(){
-  var root=document.documentElement, btn=document.getElementById('theme-btn'), meta=document.querySelector('meta[name="theme-color"]');
-  function apply(d){ root.setAttribute('data-theme',d?'dark':'light'); if(meta) meta.setAttribute('content',d?'#0E0E0E':'#37441F'); if(btn) btn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode'); }
+  var root=document.documentElement, btns=[].slice.call(document.querySelectorAll('[data-theme-toggle]')), meta=document.querySelector('meta[name="theme-color"]');
+  function apply(d){ root.setAttribute('data-theme',d?'dark':'light'); if(meta) meta.setAttribute('content',d?'#0E0E0E':'#37441F'); btns.forEach(function(b){b.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode')}); }
   apply(root.getAttribute('data-theme')==='dark');
-  if(btn) btn.addEventListener('click',function(){ var d=root.getAttribute('data-theme')!=='dark'; apply(d); try{localStorage.setItem('ff-theme',d?'dark':'light')}catch(e){} });
+  btns.forEach(function(b){ b.addEventListener('click',function(){ var d=root.getAttribute('data-theme')!=='dark'; apply(d); try{localStorage.setItem('ff-theme',d?'dark':'light')}catch(e){} }); });
   if(window.matchMedia){ var mq=matchMedia('(prefers-color-scheme: dark)'); var f=function(e){ var s=null; try{s=localStorage.getItem('ff-theme')}catch(_){} if(!s) apply(e.matches); }; mq.addEventListener?mq.addEventListener('change',f):mq.addListener(f); }
 })();
 /* WhatsApp composer */
