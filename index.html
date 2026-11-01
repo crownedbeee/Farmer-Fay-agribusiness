@@ -332,6 +332,113 @@ form#wa-form .pick-row{gap:10px}
 form#wa-form .pick span{padding:10px 16px}
 form#wa-form textarea{min-height:120px}
 form#wa-form .small{margin-top:-6px}
+
+/* ===== layout pass: balance + breathing room ===== */
+:root{--strip-h:84px}
+body{line-height:1.7}
+p{color:inherit}
+.marquee{padding-block:18px}
+.track span{font-size:clamp(18px,2vw,26px);line-height:1.85}
+/* hero + strip fill the first screen on laptops and desktops */
+@media (min-width:901px){
+  .hero{min-height:calc(100svh - var(--strip-h));display:flex;align-items:center;padding-block:calc(var(--nav-h) + clamp(24px,4vh,48px)) clamp(28px,5vh,56px)}
+  .hero > .wrap{width:100%}
+  .hero h1{font-size:clamp(38px,min(4.6vw,7.6vh),70px)}
+  .hero-copy{gap:clamp(16px,2.6vh,26px)}
+  .hero-copy p{font-size:clamp(16px,2.1vh,18px);max-width:46ch}
+  .hero-photos{min-height:0}
+}
+/* About: image and text balanced, fits one screen */
+.about{padding-block:clamp(72px,8vw,112px)}
+.about-grid{align-items:stretch;gap:clamp(32px,5vw,80px)}
+.portrait .ph{min-height:0}
+.about h2{font-size:clamp(42px,5.6vw,84px);margin:12px 0 4px}
+.about .role{margin-bottom:22px}
+.about .bio{gap:14px}
+.about blockquote{margin-top:28px;padding-top:22px;font-size:clamp(22px,2.1vw,28px)}
+/* investment: one photo on top, one below, one tall beside them */
+.inv-photos{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));min-height:520px}
+.inv-photos .ip-a{grid-column:1;grid-row:1}
+.inv-photos .ip-b{grid-column:1;grid-row:2}
+.inv-photos .ip-c{grid-column:2;grid-row:1 / span 2}
+@media (max-width:860px){
+  .inv-photos{min-height:0;grid-template-rows:auto auto}
+  .inv-photos .ph{aspect-ratio:auto}
+  .inv-photos .ip-a,.inv-photos .ip-b{aspect-ratio:1}
+  .inv-photos .ip-c{aspect-ratio:auto}
+}
+/* pills: equal widths, two per row */
+.inv-copy .chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:420px}
+.inv-copy .chips span{text-align:center}
+
+/* ===== type scale pass: calmer sizes on large screens ===== */
+:root{--max:1200px}
+body{font-size:16px}
+.hero h1{font-size:clamp(34px,min(3.9vw,6.8vh),56px)}
+.hero-copy p{font-size:clamp(15px,2vh,17px)}
+.head h2,.inv-copy h2{font-size:clamp(34px,4.6vw,64px)}
+.about h2{font-size:clamp(38px,4.6vw,64px)}
+.contact h2{font-size:clamp(38px,4.8vw,68px)}
+.statement p{font-size:clamp(26px,3.3vw,46px)}
+.steps .n{font-size:clamp(44px,4.2vw,60px)}
+.svc h3{font-size:clamp(21px,1.8vw,25px)}
+.item h3{font-size:21px} .steps h3{font-size:20px} .who-grid h3{font-size:19px} form h3{font-size:23px}
+.svc p,.item p,.steps p,.who-grid p{font-size:15px}
+.track span{font-size:clamp(16px,1.7vw,22px)}
+.about blockquote{font-size:clamp(20px,1.8vw,24px)}
+.inv-copy .lead{font-size:clamp(18px,1.5vw,21px)}
+.foot-main .tagline{font-size:clamp(18px,1.5vw,21px)}
+:root{--strip-h:76px}
+.marquee{padding-block:16px}
+
+/* ===== service picker: even grid, no circles, leaf when selected ===== */
+.pick-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pick{display:block}
+.pick span{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:46px;padding:10px 14px;border:1px solid #DDD6D6;border-radius:10px;font-size:14px;line-height:1.3;background:#fff;transition:background .2s,border-color .2s,color .2s}
+.pick span::before{content:none;display:none}
+.pick span::after{content:"";flex:none;width:12px;height:18px;margin-left:10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 38'%3E%3Cpath d='M13 1C4 10 2 22 13 37 24 22 22 10 13 1Z' fill='%2337441F'/%3E%3Cpath d='M13 6v28' stroke='%23F7ECEC' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat;opacity:0;transform:scale(.6) rotate(-20deg);transition:opacity .2s,transform .25s}
+.pick:hover span{border-color:var(--rose)}
+.pick input:checked + span{background:var(--rose-soft);border-color:var(--olive);color:var(--ink)}
+.pick input:checked + span::after{opacity:1;transform:none}
+form#wa-form .pick span{padding:10px 14px}
+@media (max-width:420px){.pick-row{grid-template-columns:minmax(0,1fr)}}
+
+.pick{display:flex}
+.pick span{flex:1}
+.pick-row > .pick:last-child:nth-child(odd){grid-column:1 / -1}
+@media (max-width:420px){.pick-row{grid-template-columns:repeat(2,minmax(0,1fr))}.pick span{font-size:13px;padding:9px 11px;min-height:44px}}
+:root{--strip-h:72px}
+.marquee{height:var(--strip-h);padding-block:0;display:flex;align-items:center}
+
+/* leaf check: line draws in, then the leaf unfurls */
+.pick span::after{content:none;display:none}
+.pick span{justify-content:flex-start;gap:10px}
+.pick span em{font-style:normal}
+.lc{flex:none;width:20px;height:20px;overflow:visible}
+.lc-st{fill:none;stroke:#37441F;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .3s ease}
+.lc-lf path:first-child{fill:#D6A9AD;stroke:#37441F;stroke-width:1.1;stroke-linejoin:round}
+.lc-vn{fill:none;stroke:#37441F;stroke-width:.8;stroke-linecap:round}
+.lc-lf{transform-box:view-box;transform-origin:14px 11px;transform:scale(0) rotate(-35deg);opacity:0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .2s ease}
+.pick span .lc{opacity:.0;transition:opacity .2s}
+.pick:hover span .lc{opacity:.35}
+.pick:hover span .lc .lc-st{stroke-dashoffset:0}
+.pick input:checked + span .lc{opacity:1}
+.pick input:checked + span .lc-st{stroke-dashoffset:0}
+.pick input:checked + span .lc-lf{transform:none;opacity:1;transition-delay:.22s}
+@media (prefers-reduced-motion:reduce){.lc-st,.lc-lf{transition:none}}
+/* phones: calmer text sizes, closer to the preview */
+@media (max-width:600px){
+  .hero .label{font-size:11px;letter-spacing:.16em}
+  .hero-copy p{font-size:16px;line-height:1.65}
+  .hero h1{font-size:clamp(32px,9.4vw,40px)}
+  .btn{font-size:13px;letter-spacing:.12em}
+  .label{font-size:11px}
+  .inv-copy .lead{font-size:18px}
+  .head p,.inv-copy p.muted,.about .bio p{font-size:15px}
+}
+@media (max-width:480px){.pick span{gap:7px;padding:9px 10px;font-size:13px;letter-spacing:0}.lc{width:16px;height:16px}form#wa-form .pick span{padding:9px 10px}form#wa-form .pick-row{gap:8px}}
+/* phones and tablets: tighter, even space above and below the hero */
+@media (max-width:900px){.hero{padding-top:calc(var(--nav-h) + 40px);padding-bottom:48px}}
 /* irrigation carousel */
 .carousel{position:relative;aspect-ratio:1;max-width:100%;overflow:hidden;border-radius:4px;background:var(--paper);touch-action:pan-y}
 .carousel .ctrack{display:flex;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1)}
@@ -484,8 +591,9 @@ html.js .chip[data-reveal],html.js .avatar[data-reveal]{transform:scale(.92);tra
         <div><a class="btn btn-pink" href="#contact" data-svc="Farm Investment">Ask about investment plans</a></div>
       </div>
       <div class="inv-photos">
-        <figure class="ph filled"><img src="images/freshly-harvested-tomatoes.jpg" alt="Freshly harvested tomatoes" loading="lazy" decoding="async"></figure>
-        <figure class="ph filled"><img src="images/crates-of-freshly-harvested-peppers.jpg" alt="Crates of freshly harvested peppers" loading="lazy" decoding="async"></figure>
+        <figure class="ph filled ip-a"><img src="images/trays-of-young-pepper-seedlings.jpg" alt="Trays of young pepper seedlings in the nursery" loading="lazy" decoding="async"></figure>
+        <figure class="ph filled ip-b"><img src="images/freshly-harvested-tomatoes.jpg" alt="Freshly harvested tomatoes" loading="lazy" decoding="async"></figure>
+        <figure class="ph filled ip-c"><img src="images/habanero-peppers-in-hand.jpg" alt="Freshly harvested habanero peppers in hand" loading="lazy" decoding="async"></figure>
       </div>
     </div>
   </section>
@@ -556,8 +664,7 @@ html.js .chip[data-reveal],html.js .avatar[data-reveal]{transform:scale(.92);tra
         <span class="label role">Founder &amp; CEO, Farmer Fay</span>
         <div class="bio">
           <p>Favour David started Farmer Fay with a simple belief: a farm deserves the same care, order and style as any modern business.</p>
-          <p>Based in Ibadan, she works with first-time farmers, busy professionals and investors across Nigeria and abroad, and travels to set up farms wherever her clients are. She helps people grow food well and profitably. Her approach is hands-on. She checks the soil herself, chooses inputs she trusts, and stays close to her clients long after setup day.</p>
-          <p>She also believes femininity and farming belong together. Farmer Fay is her proof that you can love pink and still get your hands deep in the soil.</p>
+          <p>She works hands-on with first-time farmers, professionals and investors across Nigeria and abroad, and travels to set up farms wherever her clients are. Farmer Fay is her proof that you can love pink and still get your hands deep in the soil.</p>
         </div>
         <blockquote>“Every farm deserves a plan, and every farmer deserves to be proud of what they grow.”<span>Favour David</span></blockquote>
       </div>
@@ -615,7 +722,7 @@ html.js .chip[data-reveal],html.js .avatar[data-reveal]{transform:scale(.92);tra
           <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" placeholder="Adaeze Okafor" autocomplete="name"></div>
           <div class="field"><label for="f-loc">Farm location</label><input id="f-loc" type="text" placeholder="e.g. Abuja, FCT"></div>
         </div>
-        <fieldset class="field picks"><legend>I’m interested in <small>(pick all that apply)</small></legend><div class="pick-row"><label class="pick"><input type="checkbox" name="svc" value="Farm Consultation"><span>Farm Consultation</span></label><label class="pick"><input type="checkbox" name="svc" value="Farm Setup &amp; Management"><span>Farm Setup &amp; Management</span></label><label class="pick"><input type="checkbox" name="svc" value="Greenhouse Setup"><span>Greenhouse Setup</span></label><label class="pick"><input type="checkbox" name="svc" value="Farm Investment"><span>Farm Investment</span></label><label class="pick"><input type="checkbox" name="svc" value="Seeds &amp; Seedlings"><span>Seeds &amp; Seedlings</span></label><label class="pick"><input type="checkbox" name="svc" value="Agrochemicals"><span>Agrochemicals</span></label><label class="pick"><input type="checkbox" name="svc" value="Irrigation Materials"><span>Irrigation Materials</span></label></div></fieldset>
+        <fieldset class="field picks"><legend>I’m interested in <small>(pick all that apply)</small></legend><div class="pick-row"><label class="pick"><input type="checkbox" name="svc" value="Farm Consultation"><span><svg class="lc" viewBox="0 0 24 24" aria-hidden="true"><path class="lc-st" pathLength="1" d="M5 20.5 L14.4 10.4"/><g class="lc-lf"><path d="M13.6 11.2 C13 6.4 16.6 2.6 22.6 1.6 C22.4 7.2 18.8 10.9 13.6 11.2 Z"/><path class="lc-vn" d="M14.6 10.2 C16.8 8 19 5.4 21.2 3"/></g></svg><em>Farm Consultation</em></span></label><label class="pick"><input type="checkbox" name="svc" value="Farm Setup &amp; Management"><span><svg class="lc" viewBox="0 0 24 24" aria-hidden="true"><path class="lc-st" pathLength="1" d="M5 20.5 L14.4 10.4"/><g class="lc-lf"><path d="M13.6 11.2 C13 6.4 16.6 2.6 22.6 1.6 C22.4 7.2 18.8 10.9 13.6 11.2 Z"/><path class="lc-vn" d="M14.6 10.2 C16.8 8 19 5.4 21.2 3"/></g></svg><em>Farm Setup &amp; Management</em></span></label><label class="pick"><input type="checkbox" name="svc" value="Greenhouse Setup"><span><svg class="lc" viewBox="0 0 24 24" aria-hidden="true"><path class="lc-st" pathLength="1" d="M5 20.5 L14.4 10.4"/><g class="lc-lf"><path d="M13.6 11.2 C13 6.4 16.6 2.6 22.6 1.6 C22.4 7.2 18.8 10.9 13.6 11.2 Z"/><path class="lc-vn" d="M14.6 10.2 C16.8 8 19 5.4 21.2 3"/></g></svg><em>Greenhouse Setup</em></span></label><label class="pick"><input type="checkbox" name="svc" value="Farm Investment"><span><svg class="lc" viewBox="0 0 24 24" aria-hidden="true"><path class="lc-st" pathLength="1" d="M5 20.5 L14.4 10.4"/><g class="lc-lf"><path d="M13.6 11.2 C13 6.4 16.6 2.6 22.6 1.6 C22.4 7.2 18.8 10.9 13.6 11.2 Z"/><path class="lc-vn" d="M14.6 10.2 C16.8 8 19 5.4 21.2 3"/></g></svg><em>Farm Investment</em></span></label><label class="pick"><input type="checkbox" name="svc" value="Seeds &amp; Seedlings"><span><svg class="lc" viewBox="0 0 24 24" aria-hidden="true"><path class="lc-st" pathLength="1" d="M5 20.5 L14.4 10.4"/><g class="lc-lf"><path d="M13.6 11.2 C13 6.4 16.6 2.6 22.6 1.6 C22.4 7.2 18.8 10.9 13.6 11.2 Z"/><path class="lc-vn" d="M14.6 10.2 C16.8 8 19 5.4 21.2 3"/></g></svg><em>Seeds &amp; Seedlings</em></span></label><label class="pick"><input type="checkbox" name="svc" value="Agrochemicals"><span><svg class="lc" viewBox="0 0 24 24" aria-hidden="true"><path class="lc-st" pathLength="1" d="M5 20.5 L14.4 10.4"/><g class="lc-lf"><path d="M13.6 11.2 C13 6.4 16.6 2.6 22.6 1.6 C22.4 7.2 18.8 10.9 13.6 11.2 Z"/><path class="lc-vn" d="M14.6 10.2 C16.8 8 19 5.4 21.2 3"/></g></svg><em>Agrochemicals</em></span></label><label class="pick"><input type="checkbox" name="svc" value="Irrigation Materials"><span><svg class="lc" viewBox="0 0 24 24" aria-hidden="true"><path class="lc-st" pathLength="1" d="M5 20.5 L14.4 10.4"/><g class="lc-lf"><path d="M13.6 11.2 C13 6.4 16.6 2.6 22.6 1.6 C22.4 7.2 18.8 10.9 13.6 11.2 Z"/><path class="lc-vn" d="M14.6 10.2 C16.8 8 19 5.4 21.2 3"/></g></svg><em>Irrigation Materials</em></span></label></div></fieldset>
         <div class="field"><label for="f-msg">Tell us more</label><textarea id="f-msg" placeholder="Land size, crops you have in mind, timeline…"></textarea></div>
         <div><a class="btn btn-pink" id="wa-send" href="https://wa.me/2347012222873" target="_blank" rel="noopener">Send on WhatsApp</a></div>
         <p class="small">Opens WhatsApp with your message filled in, so you can review it before sending.</p>
